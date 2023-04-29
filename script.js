@@ -44,11 +44,21 @@ function addBookToList(bookString) {
     listItem.innerHTML = `
         <button class="book-list-btn">
             <span onClick="displayInfo('${bookObj.title}')" class="book-title">${bookObj.title}</span>
-            <span onClick="deleteBook('${bookObj.title}${count}', event)" class="delete">\u00D7</span>
+            <div class="functionality">
+                <span onClick="editBook('${bookObj.title}${count}')" class="edit-book" style="font-size:0.6em; color:#cecbc8;">Edit</span>
+                <span onClick="deleteBook('${bookObj.title}${count}', event)" class="delete">\u00D7</span>
+            </div>
         </button>`;
     listItem.id = `${bookObj.title}${count}`;
     count += 1;
     listItems.appendChild(listItem);
+}
+
+// Function to edit a book
+function editBook(bookId) {
+    const editItem = document.getElementById(bookId)
+    const bookTitle = bookId.slice(0,-1)
+    bookTitle.value.textContent = se
 }
 
 // Function to delete a book from the display list and sessionStorage
@@ -60,6 +70,7 @@ function deleteBook (bookId) {
     // Removing the book from sessionStorage
     const bookTitle = bookId.slice(0, -1)
     sessionStorage.removeItem(bookTitle)
+    count -= 1
 }
 
 const displayTitle = document.querySelector(".display-title")
