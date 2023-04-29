@@ -16,22 +16,50 @@ submitBtn.addEventListener('click', function(event) {
     bookRecommend.value = ""
 })
 
-// Function to add books to the catelogue
-function addBook() {
-    sessionStorage.setItem("title", bookTitle.value);
-    sessionStorage.setItem("author", bookAuthor.value);
-    sessionStorage.setItem("genre", bookGenre.value);
-    sessionStorage.setItem("review", bookReview.value);
-    sessionStorage.setItem("recommend", bookRecommend.value);
-    addBookToList(sessionStorage.getItem("title"))
+// Function to add a book to the sessionStorage
+function addBook () {
+    if (bookTitle.value) {
+        const bookObj = {
+            "title": bookTitle.value,
+            "author": bookAuthor.value,
+            "genre": bookGenre.value,
+            "review": bookReview.value,
+            "recommend": bookRecommend.value,
+        }
+        const bookString = JSON.stringify(bookObj)
+        sessionStorage.setItem(bookTitle.value, bookString)
+    } else {
+        alert("Please add a book title to conitue")
+    }
+    
+    addBookToList(sessionStorage.getItem(bookTitle.value))
 }
 
+let count = 0
 // Function to the book to the list to show on the website
-function addBookToList (newBook) {
+function addBookToList(bookString) {
+    const bookObj = JSON.parse(bookString);
+    const listItems = document.querySelector(".listItems");
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
+        <button class="book-list-btn">
+            <span onClick="displayInfo('${bookObj.title}')" class="book-title">${bookObj.title}</span>
+            <span onClick="deleteBook('${bookObj.title}${count}', event)" class="delete">\u00D7</span>
+        </button>`;
+    listItem.id = `${bookObj.title}${count}`;
+    count += 1;
+    listItems.appendChild(listItem);
+}
+
+// Function to delete a book from the display list and sessionStorage
+function deleteBook (bookId) {
     const listItems = document.querySelector(".listItems")
-    const listItem = document.createElement('li')
-    listItem.innerHTML = `<a href="#" onClick="displayInfo()" class="added-book-title">${newBook}<span class="delete">\u00D7</span></a>`
-    listItems.appendChild(listItem)
+    const deleteItem = document.getElementById(bookId)
+    listItems.removeChild(deleteItem)
+
+    // Removing the book from sessionStorage
+    const bookTitle = bookId.slice(0, -1)
+    sessionStorage.removeItem(bookTitle)
 }
 
 const displayTitle = document.querySelector(".display-title")
@@ -41,11 +69,20 @@ const displayReview = document.querySelector(".display-review")
 const displayRecommend = document.querySelector(".display-recommend")
 
 // Function to display a clicked book's details in the third column
-function displayInfo () {
-    displayTitle.textContent = `Title: ${sessionStorage.getItem("title")}`
-    displayAuthor.textContent = `Author: ${sessionStorage.getItem("author")}`
-    displayGenre.textContent = `Genre: ${sessionStorage.getItem("genre")}`
-    displayReview.textContent = `Review: ${sessionStorage.getItem("review")}`
-    displayRecommend.textContent = `Recommend: ${sessionStorage.getItem("recommend")}`
+function displayInfo (bookTitle) {
+    const bookString = sessionStorage.getItem(bookTitle)
+    const bookObj = JSON.parse(bookString)
+    displayTitle.textContent = `Title: ${bookObj.title}`
+    displayAuthor.textContent = `Author: ${bookObj.author}`
+    displayGenre.textContent = `Genre: ${bookObj.genre}`
+    displayReview.textContent = `Review: ${bookObj.review}`
+    displayRecommend.textContent = `Recommend: ${bookObj.recommend}`
 }
+
+// Function to edit a book's information
+function editBook () {
+
+}
+
+
 
