@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catelogue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="col">
+                <h1>The Book Cate<span class="extra-title">logue</span>'r</h1>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container row">
+            <div class="col one">
+                <h2>Add a New Book</h2>
+                <form>
+                    <div class="title form-items">
+                        <label class="label">Book Title:</label>
+                        <input class="input" id="book-title" type="text" placeholder="Title of the book is...">
+                    </div>
+                    <div class="author form-items">
+                        <label class="label">Author: </label>
+                        <input class="input" id="book-author" type="text" placeholder="The Author is...">
+                    </div>
+                    <div class="genre form-items">
+                        <label class="label">Genre: </label>
+                        <input class="input" id="book-genre" type="text" placeholder="The Genre is...">
+                    </div>
+                    <div class="review form-items">
+                        <label class="label">Review: </label>
+                        <input class="input" id="book-review" type="text" placeholder="How was the book...">
+                    </div>
+                    <div class="recommend form-items">
+                        <label class="label" for >Recommend: </label>
+                        <input class="input" id="book-recommend" type="text" placeholder="Yes or No...">
+                    </div>
+                    <button class="submit-button" type="submit">Logue Info...</button>
+                </form>
+            </div>
+            <div class="col two">
+                <h2>Added Books</h2>
+                <ul class="listItems">
+                    <!-- JavaScript entries fill in here -->
+                </ul>
+            </div>
+            <div class="col three">
+                <h2>Book Details</h2>
+                <p class="display-title">Title:</p>
+                <p class="display-author">Author:</p>
+                <p class="display-genre">Genre:</p>
+                <p class="display-review">Review:</p>
+                <p class="display-recommend">Recommend:</p>
+            </div>
+        </div>
+
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
