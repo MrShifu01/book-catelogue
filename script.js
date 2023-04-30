@@ -45,7 +45,7 @@ function addBookToList(bookString) {
         <button class="book-list-btn">
             <span onClick="displayInfo('${bookObj.title}')" class="book-title">${bookObj.title}</span>
             <div class="functionality">
-                <span onClick="editBook('${bookObj.title}${count}')" class="edit-book" style="font-size:0.6em; color:#cecbc8;">Edit</span>
+                <span onClick="editBook('${bookObj.title}${count}', event)" class="edit-book" style="font-size:0.6em; color:#633D2E;">Edit</span>
                 <span onClick="deleteBook('${bookObj.title}${count}', event)" class="delete">\u00D7</span>
             </div>
         </button>`;
@@ -56,9 +56,16 @@ function addBookToList(bookString) {
 
 // Function to edit a book
 function editBook(bookId) {
-    const editItem = document.getElementById(bookId)
-    const bookTitle = bookId.slice(0,-1)
-    bookTitle.value.textContent = se
+    const bookTitleStr = bookId.slice(0,-1)
+    const bookString = sessionStorage.getItem(bookTitleStr)
+    const bookObj = JSON.parse(bookString)
+
+    bookTitle.value = bookObj.title
+    bookAuthor.value = bookObj.author;
+    bookGenre.value = bookObj.genre;
+    bookReview.value = bookObj.review;
+    bookRecommend.value = bookObj.recommend;
+    deleteBook(bookId)
 }
 
 // Function to delete a book from the display list and sessionStorage
@@ -90,10 +97,6 @@ function displayInfo (bookTitle) {
     displayRecommend.textContent = `Recommend: ${bookObj.recommend}`
 }
 
-// Function to edit a book's information
-function editBook () {
-
-}
 
 
 
