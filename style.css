@@ -23,6 +23,11 @@ body {
     flex-direction: column;
 }
 
+h6 {
+    text-align: center;
+    margin-top: 0;
+}
+
 .extra-title {
     color: #7f6951;
 }
