@@ -14,7 +14,8 @@
 
 body {
     margin: 0;
-    background-color: #F0D8A8;
+    background: linear-gradient(to bottom left,#cecbc8,#7f6951);
+    height: 100vh;
     font-family: "Neucha", sans-serif;
     color: #85871A;
     display: flex;
